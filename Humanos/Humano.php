@@ -1,0 +1,20 @@
+<?php 
+    class Humano{
+        public String $nome;
+        public int $idade;
+        public String $endereco;
+        public String $contato;
+
+        public function __construct($nome, $idade, $endereco, $contato)
+        {
+            $this->nome = $nome;
+            $this->idade = $idade;
+            $this->endereco = $endereco;
+            $this->contato = $contato;
+        }
+
+        
+    }
+
+
+?>
