@@ -30,7 +30,7 @@ class Clinica
     {
         if(count($this->produtos) > 0){
         foreach ($this->produtos as $produto) {
-            echo "Nome do produto: " . $produto->nome . ". Preço: R$" . $produto->getPreco() . ";";
+            echo "Nome do produto:" . $produto->nome . ". Preço:R$" . $produto->getPreco() . ";\n";
         }} else{
             echo "Não há produtos no PET SHOP\n";
         }
@@ -101,7 +101,7 @@ class Clinica
     {
         if (count($this->animais) > 0) {
             foreach ($this->animais as $animal) { 
-                echo "Nome do animal: " . $animal->nome . ". Raça: " . $animal->raca .". Dono:  " . $animal->dono->nome .  "\n";
+                echo "Nome do animal:" . $animal->nome . ". Raça:" . $animal->raca .". Dono:" . $animal->dono->nome .  "\n";
             }
         } else{
             echo "Não há animais agendados";

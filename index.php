@@ -9,9 +9,25 @@ function printarMensagem($mensagem)
     echo "$mensagem\n";
     echo "-------------------------------------\n";
 }
+//produtos teste
+$produto1 = new Produto("Ração", 4);
+$produto2 = new Produto("Coleira", 20);
+$produto3 = new Produto("Shampoo para cachorro", 14);
+$produto4 = new Produto("Desverminante", 7);
+$produto5 = new Produto("Shampoo para furao", 77);
 
+$clinica->adicionarProduto($produto1);
+$clinica->adicionarProduto($produto2);
+$clinica->adicionarProduto($produto3);
+$clinica->adicionarProduto($produto4);
+$clinica->adicionarProduto($produto5);
+
+
+//funcionarios
 $balconista = new Balconista("Maria", "maria@gmail.com", "Rua dos balcões", 23, "42 99999-9999", 2200);
+//sistema
 $clinica->adicionarFuncionario($balconista);
+//cliente
 $clienteTeste = new Humano("gus", 31, "gustavo2016delonzek@gmail.com", "rua xx", "42 99");
 $clinica->cadastrarCliente($clienteTeste);
 
@@ -131,7 +147,17 @@ while (true) {
                             }
 
                         } else if($opcao == 3){
-                            $clinica->realizarVenda($carrinhoCliente, $clienteAtual);
+                            if(count($carrinhoCliente) > 0){
+
+                                $clinica->realizarVenda($carrinhoCliente, $clienteAtual);
+                                $carrinhoCliente = [];
+                                echo "Compra realizada com sucesso!";
+                                sleep(2);
+                                break;
+                            } else{
+                                echo "Carrinho vazio. Por favor, adicione algum produto ao carrinho.";
+                                sleep(2);
+                            }
                         } else if($opcao == 4){
                             break;
                         }
