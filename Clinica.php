@@ -16,18 +16,23 @@ class Clinica
     private $produtos;
     private $funcionarios;
     private $animais;
+    private $clientes;
 
     public function __construct(){
         $this->vendas = [];
         $this->produtos = [];
         $this->funcionarios = [];
         $this->animais = [];
+        $this->clientes = [];
     }
 
     public function listarProdutos()
     {
+        if(count($this->produtos) > 0){
         foreach ($this->produtos as $produto) {
             echo "Nome do produto: " . $produto->nome . ". Preço: R$" . $produto->getPreco() . ";";
+        }} else{
+            echo "Não há produtos no PET SHOP\n";
         }
     }
     public function adicionarProduto($produto)
@@ -72,6 +77,19 @@ class Clinica
 
         }
         return false;
+    }
+
+    public function identificarCliente($email){
+        foreach($this->clientes as $cliente){
+            if($cliente->email == $email){
+                return $cliente;
+            }
+        }
+        return false;
+    }
+
+    public function cadastrarCliente($cliente){
+        $this->clientes[] = $cliente;
     }
 
     public function agendarAnimal($animal)
