@@ -8,7 +8,7 @@
         }
 
         public function falar(){
-            echo "MIauu miauu!";
+            echo "Miauu miauu!";
         }
 
     }

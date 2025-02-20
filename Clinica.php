@@ -118,6 +118,19 @@ class Clinica
         }
     }
 
+    public function getProduto($nome){
+        if(count($this->produtos) > 0){
+            foreach($this->produtos as $produto){
+                if($produto->nome == $nome){
+                    return $produto;
+                }
+            }
+        } else{
+            return false;      
+        }
+
+    }
+
 
 
 
