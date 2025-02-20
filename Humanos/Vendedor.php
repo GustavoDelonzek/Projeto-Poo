@@ -4,9 +4,9 @@
     class Vendedor extends Humano{
         private float $salario;
 
-        public function __construct($nome, $endereco, $idade, $contato, $salario)
+        public function __construct($nome, $endereco, $idade, $contato, $email ,$salario)
         {
-            parent::__construct($nome, $idade, $endereco, $contato);
+            parent::__construct($nome, $idade, $email, $endereco, $contato);
             $this->salario = $salario;
         }
 
