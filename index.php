@@ -15,6 +15,27 @@ $clinica->adicionarFuncionario($balconista);
 $clienteTeste = new Humano("gus", 31, "gustavo2016delonzek@gmail.com", "rua xx", "42 99");
 $clinica->cadastrarCliente($clienteTeste);
 
+function formularioAnimal($dono,$animal){
+    global $clinica;
+    $nome = readline("Nome do animal: ");
+    $raca = readline("Raça do animal: ");
+    $cor = readline("Cor do animal: ");
+    $peso = readline("Peso do animal: ");
+
+    if($animal == 1){
+        $animalInstancia = new Cachorro($nome, $raca, 4, $cor, $peso, $dono);
+        $clinica->agendarAnimal($animalInstancia);
+    } else if($animal == 2){
+        $animalInstancia = new Gato($nome, $raca, 4, $cor, $peso, $dono);
+        $clinica->agendarAnimal($animalInstancia);
+    } else {
+        $animalInstancia = new Furao($nome, $raca, 4, $cor, $peso, $dono);
+        $clinica->agendarAnimal($animalInstancia);
+    }
+
+    echo "Agendando...";
+    sleep(2);
+}
 function limparTela()
 {
     echo "\033[H\033[J";
@@ -74,7 +95,18 @@ while (true) {
                 echo "[1]Agendar consulta pet\n[2]Ver produtos \n[3]Comprar produto\n[4]Sair\n";
                 $opcao = readline("-");
                 if($opcao == 1){
-                    //lógica consulta cadastrar animal na consulta
+                    while(true){
+                        limparTela();
+                        printarMensagem("AGENDAMENTO DE PET");
+                        echo "Qual o seu pet?\n";
+                        echo "[1]Cachorro\n[2]Gato\n[3]Furão\n";
+                        $opcao = readline("-");
+                        if($opcao > 0 && $opcao < 4){
+                            formularioAnimal($clienteAtual, $opcao);
+
+                            break;
+                        }
+                    }
                 } else if($opcao == 2){
                     limparTela();
                     printarMensagem("PRODUTOS DA LOJA");
