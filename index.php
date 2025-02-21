@@ -185,6 +185,8 @@ while (true) {
                             limparTela();
                             printarMensagem("Adicionar produto ao carrinho");
                             $produto = readline("Digite o nome do produto: ");
+
+                            $produto = strtolower(trim($produto));
                             if($clinica->getProduto($produto)){
                                 $carrinhoCliente[] = $clinica->getProduto($produto);
                                 echo "Produto adicionado ao carrinho!";
