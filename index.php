@@ -38,10 +38,10 @@ $clinica->cadastrarCliente($clienteTeste);
 function formularioAnimal($dono, $animal)
 {
     global $clinica;
-    $nome = readline("Nome do animal: ");
-    $raca = readline("Raça do animal: ");
-    $cor = readline("Cor do animal: ");
-    $peso = readline("Peso do animal: ");
+    $nome = verificaString("Nome do animal: ", "AGENDAMENTO DE PET");
+    $raca = verificaString("Raça do animal: ", "AGENDAMENTO DE PET");
+    $cor = verificaString("Cor do animal: ", "AGENDAMENTO DE PET");
+    $peso = verificaNumerico("Peso do animal: ", "AGENDAMENTO DE PET");
 
     if ($animal == 1) {
         $animalInstancia = new Cachorro($nome, $raca, 4, $cor, $peso, $dono);
@@ -62,13 +62,13 @@ function limparTela()
     echo "\033[H\033[J";
 }
 
-function verificaString($mensagem){
+function verificaString($mensagem, $cabecalho){
     $string = readline($mensagem);
 
     while(true){
         if(strlen(trim($string)) < 3){ 
             limparTela();
-            printarMensagem("CADASTRO DE CLIENTE");
+            printarMensagem($cabecalho);
             echo "Digite pelo menos 3 caracteres\n";
             $string = readline($mensagem);
         } else{
@@ -79,15 +79,15 @@ function verificaString($mensagem){
     return $string;
 }
 
-function verificaInt($mensagem){
-     (int) $inteiro = readline($mensagem);
+function verificaNumerico($mensagem, $cabecalho){
+    $inteiro = readline($mensagem);
     while(true){
         if(is_numeric($inteiro)){
             break;
         } else{
             limparTela();
-            printarMensagem("CADASTRO DE CLIENTE");
-            echo "Apenas números inteiros são válidos\n";
+            printarMensagem($cabecalho);
+            echo "Apenas números são válidos\n";
             $inteiro = readline($mensagem);
         }
     }
@@ -225,11 +225,11 @@ while (true) {
                     limparTela();
                     printarMensagem("CADASTRO DE CLIENTE");
                     echo "Vai ser necessário as seguintes informações sobre você:\n";
-                    $nomeCliente = verificaString("Nome: ");
-                    $idadeCliente = verificaInt("Idade: ");
-                    $emailCliente = verificaString("Email: ");
-                    $contatoCliente = verificaString("Contato: ");
-                    $enderecoCliente = verificaString("Endereço (Rua xx, numero xx): ");
+                    $nomeCliente = verificaString("Nome: ", "CADASTRO DE CLIENTE");
+                    $idadeCliente = verificaNumerico("Idade: ","CADASTRO DE CLIENTE");
+                    $emailCliente = verificaString("Email: ", "CADASTRO DE CLIENTE");
+                    $contatoCliente = verificaString("Contato: ", "CADASTRO DE CLIENTE");
+                    $enderecoCliente = verificaString("Endereço (Rua xx, numero xx): ", "CADASTRO DE CLIENTE");
                     $novoCliente = new Humano($nomeCliente, $idadeCliente, $emailCliente, $enderecoCliente, $contatoCliente);
                     $clinica->cadastrarCliente($novoCliente);
                     echo "Cadastrando usuário...";
