@@ -25,8 +25,12 @@ $clinica->adicionarProduto($produto5);
 
 //funcionarios
 $balconista = new Balconista("Maria", "maria@gmail.com", "Rua dos balcões", 23, "42 99999-9999", 2200);
+$veterinaria = new Veterinario("Paula", "rua xx", 22, "paula@gmail.com", "42 99999-1121", 2200);
+
 //sistema
 $clinica->adicionarFuncionario($balconista);
+$clinica->adicionarFuncionario($veterinaria);
+
 //cliente
 $clienteTeste = new Humano("gus", 31, "gustavo2016delonzek@gmail.com", "rua xx", "42 99");
 $clinica->cadastrarCliente($clienteTeste);
@@ -56,7 +60,39 @@ function formularioAnimal($dono, $animal)
 function limparTela()
 {
     echo "\033[H\033[J";
+}
 
+function verificaString($mensagem){
+    $string = readline($mensagem);
+
+    while(true){
+        if(strlen(trim($string)) < 3){ 
+            limparTela();
+            printarMensagem("CADASTRO DE CLIENTE");
+            echo "Digite pelo menos 3 caracteres\n";
+            $string = readline($mensagem);
+        } else{
+            break;
+        }
+
+    }
+    return $string;
+}
+
+function verificaInt($mensagem){
+     (int) $inteiro = readline($mensagem);
+    while(true){
+        if(is_numeric($inteiro)){
+            break;
+        } else{
+            limparTela();
+            printarMensagem("CADASTRO DE CLIENTE");
+            echo "Apenas números inteiros são válidos\n";
+            $inteiro = readline($mensagem);
+        }
+    }
+
+    return $inteiro;
 }
 
 
@@ -70,6 +106,7 @@ while (true) {
         $funcionario = readline("Digite o nome do funcionário: ");
         $funcionario = ucfirst(strtolower($funcionario));
         if ($clinica->identificarFuncionario($funcionario)) {
+            $funcionario = $clinica->identificarFuncionario($funcionario);
             while (true) {
                 limparTela();
                 printarMensagem("SEÇÃO FUNCIONÁRIO");
@@ -79,7 +116,8 @@ while (true) {
                     limparTela();
                     printarMensagem("Lista de animais agendados!");
                     $clinica->listarAnimais();
-                    readline("\nPressione enter para voltar...");
+                    echo "\n";
+                    readline("Pressione enter para voltar...");
                 } else if ($opcao == 2) {
                     limparTela();
                     printarMensagem("Atendimento");
@@ -96,7 +134,7 @@ while (true) {
                 }    
                 else if ($opcao == 4) {
                     limparTela();
-                    echo "Seu sálario atual é de R$" . number_format($balconista->calculaSalario(), 2);
+                    echo "Seu sálario atual é de R$" . number_format($funcionario->calculaSalario(), 2);
                     sleep(2);
                 } else if ($opcao == 5) {
                     break;
@@ -141,6 +179,7 @@ while (true) {
                             limparTela();
                             printarMensagem("PRODUTOS DA LOJA");
                             $clinica->listarProdutos();
+                            echo "\n";
                             readline("Pressione ENTER para voltar...");
                         } else if($opcao == 2){
                             limparTela();
@@ -177,20 +216,26 @@ while (true) {
                 }
             }
         } else {
-            while (true) {
-                limparTela();
-                printarMensagem("CADASTRO DE CLIENTE");
-                echo "Vai ser necessário as seguintes informações sobre você:\n";
-                $nomeCliente = readline("Nome: ");
-                $idadeCliente = readline("Idade: ");
-                $emailCliente = readline("Email: ");
-                $contatoCliente = readline("Contato: ");
-                $enderecoCliente = readline("Endereço (Rua xx, numero xx): ");
-                $novoCliente = new Humano($nomeCliente, $idadeCliente, $emailCliente, $enderecoCliente, $contatoCliente);
-                $clinica->cadastrarCliente($novoCliente);
-                echo "Cadastrando usuário...";
-                sleep(2);
-                break;
+            limparTela();
+            printarMensagem("NOVO POR AQUI?");
+            echo "[1]Cadastrar como cliente\n[*]Cancelar\n";
+            $opcao = readline("-");
+            if($opcao == 1){
+                while (true) {
+                    limparTela();
+                    printarMensagem("CADASTRO DE CLIENTE");
+                    echo "Vai ser necessário as seguintes informações sobre você:\n";
+                    $nomeCliente = verificaString("Nome: ");
+                    $idadeCliente = verificaInt("Idade: ");
+                    $emailCliente = verificaString("Email: ");
+                    $contatoCliente = verificaString("Contato: ");
+                    $enderecoCliente = verificaString("Endereço (Rua xx, numero xx): ");
+                    $novoCliente = new Humano($nomeCliente, $idadeCliente, $emailCliente, $enderecoCliente, $contatoCliente);
+                    $clinica->cadastrarCliente($novoCliente);
+                    echo "Cadastrando usuário...";
+                    sleep(2);
+                    break;
+                }
             }
 
         }

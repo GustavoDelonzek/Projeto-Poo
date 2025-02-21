@@ -76,7 +76,7 @@ class Clinica
     {
         foreach ($this->funcionarios as $funcionario) {
             if ($funcionario->nome == $nome) {
-                return true;
+                return $funcionario;
             }
 
         }
