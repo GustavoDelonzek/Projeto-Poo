@@ -72,8 +72,8 @@ while (true) {
         if ($clinica->identificarFuncionario($funcionario)) {
             while (true) {
                 limparTela();
-                printarMensagem("Boas vindas ao sistema");
-                echo "[1]Animais agendados\n[2]Mandar próximo animal pra consulta\n[3]Ver seu salário\n[4]Sair\n";
+                printarMensagem("SEÇÃO FUNCIONÁRIO");
+                echo "[1]Animais agendados\n[2]Mandar próximo animal pra consulta\n[3]Vendas feitas\n[4]Ver seu salário\n[5]Sair\n";
                 $opcao = readline('-');
                 if ($opcao == 1) {
                     limparTela();
@@ -87,11 +87,18 @@ while (true) {
                     $clinica->atenderAnimal();
                     sleep(2);
 
-                } else if ($opcao == 3) {
+                } else if($opcao == 3){
+                    limparTela();
+                    printarMensagem("Lista de vendas");
+                    $clinica->listarVendas();
+                    echo "\n";
+                    readline("Pressione enter para voltar...");
+                }    
+                else if ($opcao == 4) {
                     limparTela();
                     echo "Seu sálario atual é de R$" . number_format($balconista->calculaSalario(), 2);
-                    sleep(5);
-                } else if ($opcao == 4) {
+                    sleep(2);
+                } else if ($opcao == 5) {
                     break;
                 }
 
@@ -141,6 +148,8 @@ while (true) {
                             $produto = readline("Digite o nome do produto: ");
                             if($clinica->getProduto($produto)){
                                 $carrinhoCliente[] = $clinica->getProduto($produto);
+                                echo "Produto adicionado ao carrinho!";
+                                sleep(1);
                             } else{
                                 echo "Produto não encontrado!";
                                 sleep(1);

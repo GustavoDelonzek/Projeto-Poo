@@ -50,7 +50,11 @@ class Clinica
         if (count($this->vendas) > 0) {
 
             foreach ($this->vendas as $venda) {
-                echo "Venda de " . count($venda->produtos) . " para o cliente " . $venda->getComprador() . "\n";
+                echo "Venda de " . count($venda->produtos)  . " para o cliente " . $venda->getComprador() . "\n";
+                echo "Produtos vendidos: ";
+                foreach ($venda->produtos as $produto) {
+                    echo $produto->nome . ";";
+                }
             }
         } else {
             echo "Não há vendas registradas";

@@ -12,7 +12,7 @@
         }
 
         public function getComprador(){
-            return $this->comprador;
+            return $this->comprador->nome;
         }
 
 
